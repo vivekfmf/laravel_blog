@@ -20,6 +20,17 @@ class RegistrationController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
+        
+        //modifies Coding for hash
+        
+        $hashedString = Hash::make(request('password'));
+        
+        $createArray = [ "name" => request('name'), 'email' => request('email'), 'password' => $hashedString ];
+        
+        $user = User::create($createArray);
+        
+        //End of modified coding for hash
+        
 
         $user = User::create(request(['name', 'email', 'password']));
 
